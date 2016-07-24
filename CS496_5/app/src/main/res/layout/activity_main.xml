@@ -9,12 +9,68 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.q.cs496_5.MainActivity">
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/mId"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/mPw"
+        android:layout_alignLeft="@+id/mPw"
+        android:layout_alignStart="@+id/mPw"
+        android:hint="YOUR ID"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/mPw"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="212dp"
+        android:hint="YOUR PASSWORD"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:id="@+id/loginBtn"
+        android:layout_alignTop="@+id/mPw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="REGISTER"
+        android:id="@+id/registerBtn"
+        android:layout_below="@+id/loginBtn"
+        android:layout_alignLeft="@+id/loginBtn"
+        android:layout_alignStart="@+id/loginBtn" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="165dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/msgText"
+        android:layout_alignTop="@+id/mPw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:textColor="#EE2222"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="000-0000-0000"
+        android:textColor="#666666"
+        android:id="@+id/mPhone"
+        android:layout_above="@+id/mId"
+        android:layout_alignLeft="@+id/mId"
+        android:layout_marginLeft="5dp"
+        android:layout_alignStart="@+id/mId"
+        android:layout_marginBottom="24dp" />
 
 </RelativeLayout>
