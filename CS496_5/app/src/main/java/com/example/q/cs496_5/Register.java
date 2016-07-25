@@ -15,7 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -66,7 +69,12 @@ public class Register extends AppCompatActivity {
                     jobj.put("name",name);
                     jobj.put("userid",id);
                     jobj.put("password",pw);
-                    jobj.put("phonenumber",phone);
+                    String temp = phone.substring(phone.length()-4);
+                    String temp2 = phone.substring(0,3);
+                    String temp3 = phone.substring(3,phone.length()-4);
+                    String real = temp2+"-"+temp3+"-"+temp;
+
+                    jobj.put("phonenumber",real);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -97,48 +105,77 @@ public class Register extends AppCompatActivity {
             Log.e("HttpConnectionThread","I'm in");
             try {
                 murl = new URL(params[0]);
+
                 HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
                 conn.setReadTimeout(10000 /* milliseconds */);
                 conn.setConnectTimeout(15000 /* milliseconds */);
                 conn.setRequestMethod("POST");
+
                 // conn.setRequestProperty("Accept", "application/json");
                 conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
                 conn.setRequestProperty("Accept-Charset", "UTF-8");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
-
                 conn.connect();
-
                 conn.getOutputStream();
                 OutputStream os =  conn.getOutputStream();
 
                 JSONObject jarray = null;
                 try {
+
                     jarray = new JSONObject(params[1]);
+                    Log.e("REGISTER", jarray.toString());
+                    //os.write(jarray.toString().getBytes("UTF-8"));
                     os.write(jarray.toString().getBytes("UTF-8"));
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 os.flush();
                 os.close();
                 response = conn.getResponseMessage();
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader( conn.getInputStream() )
+                );
+                String inputLine;
+                responseData = "";
+                //read the InputStream with the BufferedReader line by line and add each line to responseData
+                while ( ( inputLine = in.readLine() ) != null ){
+                    responseData += inputLine;
+                }
+
+                try {
+
+                    JSONObject jRes = new JSONObject(responseData);
+                    if (jRes.getString("register").equals("Success!")){
+                        //register 성공
+                       // Toast.makeText(Register.this, "Now you are registered\n Login Now",Toast.LENGTH_LONG);
+                        Intent intent = new Intent(Register.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             } catch (IOException e) {
-
+                Log.e("AAA","NONONNONO");
             }
-            // 레지스터 결과
+           /* // 레지스터 결과
             try {
+                Log.e("RES",response.toString()+"AA");
                 JSONObject jRes = new JSONObject(response);
-                if (jRes.has("userid")){
+                if (jRes.has("register")){
                     //register 성공
-                    Toast.makeText(getApplicationContext(), "Now you are registered\n Login Now",Toast.LENGTH_LONG);
+                    Toast.makeText(Register.this, "Now you are registered\n Login Now",Toast.LENGTH_LONG);
                     Intent intent = new Intent(Register.this, MainActivity.class);
                     startActivity(intent);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
 
 
             return response;

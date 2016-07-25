@@ -63,13 +63,16 @@ public class MainActivity extends FragmentActivity {
     String PORT = "8080";
 
     int REQUEST_CODE_READ_SMS = 100;
-
+    int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
+    int  MY_PERMISSIONS_REQUEST_WRITE_CONTACTS = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+     /*   Intent intent = new Intent(MainActivity.this, MakeNewGroup.class);
+        startActivity(intent);*/
         callbackManager = CallbackManager.Factory.create(); //로그인 응답을 처리할 콜백 관리자 생성
         PhoneTextView = (TextView) findViewById(R.id.mPhone);
         IdEditView = (EditText) findViewById(R.id.mId);
@@ -89,6 +92,20 @@ public class MainActivity extends FragmentActivity {
                     REQUEST_CODE_READ_SMS); // define this constant yourself
         } else {
             // you have the permission
+        }
+        int permissionContact = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+
+        if (permissionContact != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+        int permissionContact2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS);
+
+        if (permissionContact2 != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_CONTACTS},
+                    MY_PERMISSIONS_REQUEST_WRITE_CONTACTS);
         }
 
 
@@ -114,6 +131,13 @@ public class MainActivity extends FragmentActivity {
                      new LoginTask().execute(URL+PORT+"/api/login/"+id+"/"+pw);
                 }
 
+            }
+        });
+        RegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Register.class);
+                startActivity(intent);
             }
         });
     }
@@ -177,6 +201,8 @@ public class MainActivity extends FragmentActivity {
                     } else {
                         //MsgTextView.setText("Login Success");
                         Log.e("AA","ASDASDasd");
+
+
                         Intent intent = new Intent(MainActivity.this, MyActivity.class);
                         intent.putExtra("id", id);
                         startActivity(intent);

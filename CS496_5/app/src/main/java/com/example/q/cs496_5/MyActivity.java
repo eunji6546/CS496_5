@@ -1,5 +1,6 @@
 package com.example.q.cs496_5;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -21,8 +22,11 @@ import android.view.ViewGroup;
 import com.facebook.login.LoginManager;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+
 public class MyActivity extends AppCompatActivity {
 
+    public static Object mContext;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -38,11 +42,15 @@ public class MyActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    public JSONArray ContactList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-
+        mContext = this;
+        ContactList = new JSONArray();
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -75,7 +83,7 @@ public class MyActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
 
             Intent intent = new Intent(this,MainActivity.class);
-            LoginManager.getInstance().logOut();
+
             this.startActivity(intent);
             // Toast.makeText(getApplicationContext(),"토스트창에 출력될 문자", Toast.LENGTH_LONG);
             return true;
@@ -138,13 +146,13 @@ public class MyActivity extends AppCompatActivity {
 
             switch (position){
                 case 0:
-                    //return Tab1Fragment.newInstance(args);
-                    return new Tab1Fragment();
+                    return Tab1Fragment.newInstance(args);
+                    //return new Tab1Fragment();
                 case 1:
                     return Tab2Fragment.newInstance(args);
                 case 2:
-                    //return Tab3Fragment.newInstance(args);
-                    return new Tab3Fragment();
+                    return Tab3Fragment.newInstance(args);
+                    //return new Tab3Fragment();
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
@@ -160,9 +168,9 @@ public class MyActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "채팅list";
-                case 1:
                     return "friends";
+                case 1:
+                    return "채팅list";
                 case 2:
                     return "others";
             }
