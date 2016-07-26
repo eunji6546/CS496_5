@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -131,14 +133,14 @@ public class Tab2Fragment extends Fragment {
                         String date, hostname, hostpn, title, account, bank, due, period;
                         JSONArray member;
                         Integer n, price;
-                        date = one.getString("date");
+                        date = one.getString("date").split("T")[0];
                         hostname = one.getString("hostname");
                         hostpn = one.getString("hostphonenumber");
                         title = one.getString("title");
                         account = one.getString("account");
                         bank = one.getString("bank");
-                        due = one.getString("due");
-                        period = one.getString("period");
+                        due = one.getString("due").split("T")[0];
+                       // period = one.getString("period");
                         member = one.getJSONArray("member");
                         price = one.getInt("price");
                         n = one.getInt("n");
@@ -168,7 +170,8 @@ public class Tab2Fragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String str = (String) payListView.getItemAtPosition(position);
+            TextView ginfo = (TextView)view.findViewById(R.id.mSecret);
+            String str = ginfo.getText().toString();
             Log.e("ITEMCLICK",str);
             Intent intent = new Intent(getActivity(), AGroup.class);
             intent.putExtra("GroupInfo",str);

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,7 +87,7 @@ public class Tab3Fragment extends Fragment {
 
             myGroupAdapter = new MyGroupAdapter(getActivity());
 
-            Log.e("HttpConnectionThread", "I'm in");
+            Log.e("FRG3 HttpConne", "I'm in");
 
             try {
                 murl = new URL(params[0]);
@@ -95,19 +96,19 @@ public class Tab3Fragment extends Fragment {
                 conn.setReadTimeout(10000 /* milliseconds */);
                 conn.setConnectTimeout(15000 /* milliseconds */);
                 conn.setRequestMethod("GET");
-                Log.e("HH","AAAAAA");
+                Log.e("FRG3 HH","AAAAAA");
                 // conn.setRequestProperty("Accept", "application/json");
                 conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
                 conn.setRequestProperty("Accept-Charset", "UTF-8");
-                Log.e("HH","BBBBBBBBB");
+                Log.e("FRG3 HH","BBBBBBBBB");
 
                 conn.connect();
-                Log.e("HH","qqqqqqqqqqqqqCC");
+                Log.e("FRG3 HH","qqqqqqqqqqqqqCC");
                 response = conn.getResponseMessage();
 
-                Log.e("HH","kkkkkCCC");
+                Log.e("FRG3 HH","kkkkkCCC");
                 is = conn.getInputStream();
-                Log.e("HH","CCCCCCCCCC");
+                Log.e("FRG3 HH","CCCCCCCCCC");
 //            // Convert the InputStream into a string
 //            String contentAsString = readIt(is, len);
 //           // Log.e("@@",contentAsString);
@@ -115,7 +116,7 @@ public class Tab3Fragment extends Fragment {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader( conn.getInputStream() )
                 );
-                Log.e("HH","DDDDDDDDDDDDDDdC");
+                Log.e("FRG3 HH","DDDDDDDDDDDDDDdC");
 
                 //initiate strings to hold response data
                 String inputLine;
@@ -126,24 +127,25 @@ public class Tab3Fragment extends Fragment {
                 }
                 try {
                     JSONObject jRes = new JSONObject(responseData);
-                    Log.e("GOT RES",jRes.toString());
+                    Log.e("FRG3 GOT RES",jRes.toString());
                     JSONArray reclist = jRes.getJSONArray("receive");
                     for( int i=0; i<reclist.length(); i++){
                         JSONObject one = (JSONObject) reclist.get(i);
+                        Log.e("FRG3",one.toString());
                         String date, hostname, hostpn, title, account, bank, due, period;
                         JSONArray member;
                         Integer n, price, restPeople;
-                        date = one.getString("date");
+                        date = one.getString("date").split("T")[0];
                         hostname = one.getString("hostname");
                         hostpn = one.getString("hostphonenumber");
                         title = one.getString("title");
                         account = one.getString("account");
                         bank = one.getString("bank");
-                        due = one.getString("due");
-                        period = one.getString("period");
+                        due = one.getString("due").split("T")[0];
+                       // period = one.getString("period");
                         member = one.getJSONArray("member");
-                        price = one.getInt("price");
-                        n = one.getInt("n");
+                        price = Integer.parseInt(one.getString("price"));
+                        n = Integer.parseInt(one.getString("n"));
                         restPeople = member.length();
 
                         myGroupAdapter.addItem(title,restPeople,date,due,price,n,one.toString());
@@ -155,7 +157,7 @@ public class Tab3Fragment extends Fragment {
                     e.printStackTrace();
                 }
             } catch (IOException e) {
-                Log.e("HH","AAAAAasdfasdfasdfA");
+                Log.e("FRG3 HH","AAAAAasdfasdfasdfA");
             }
             return null;
         }
@@ -177,8 +179,9 @@ public class Tab3Fragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//Intent 넘길 때 넘겨야 할 그룹 인포 스트링 뽑아내는 작업;
-            String str = "";
+            TextView ginfo = (TextView)view.findViewById(R.id.mSecret);
+            String str = ginfo.getText().toString();
+            Log.e("FRG3 ITEMCLICK",str);
             Intent intent = new Intent(getActivity(), AMyGroup.class);
             intent.putExtra("GroupInfo",str);
             startActivity(intent);

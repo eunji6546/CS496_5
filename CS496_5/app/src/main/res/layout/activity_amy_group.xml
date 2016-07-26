@@ -151,6 +151,30 @@
         android:layout_alignTop="@+id/textView11"
         android:layout_alignLeft="@+id/mBank"
         android:layout_alignStart="@+id/mBank" />
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Rest People"
+
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/a_group_label"
+        android:layout_marginTop="10dp"
+
+        android:background="@color/colorLabel"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/unpaidPeopleListView"
+        android:layout_below="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

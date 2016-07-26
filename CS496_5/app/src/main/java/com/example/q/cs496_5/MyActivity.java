@@ -151,6 +151,7 @@ public class MyActivity extends AppCompatActivity {
                 case 1:
                     return Tab2Fragment.newInstance(args);
                 case 2:
+                    //return Tab3Fragment.newInstance(args);
                     return Tab3Fragment.newInstance(args);
                     //return new Tab3Fragment();
                 default:

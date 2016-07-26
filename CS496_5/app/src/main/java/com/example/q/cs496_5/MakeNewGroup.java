@@ -34,9 +34,10 @@ import java.util.TimerTask;
 
 public class MakeNewGroup extends AppCompatActivity {
 
-    String[] listItemsFirstRow = {"item 1", "item 2", "item 3"};
+    String[] listItemsFirstRow = {"우리","국민","기업","농협","신한","하나","제일","경남","광주","대구","도이치",
+            "부산","비엔피파리바","산립조합","산업","상호저축","새마을금고","수출입","수협","신협","우체국","전북","제주","kb투자증권" };
     String[] listPeriodHour = {"3h","6h","9h","12h","1day","2day","3day","4day","5day","6day","7day","1month"};
-    String[] FriendList ; //= {"이주희","박정빈"};
+    String[] FriendList ;
     boolean[] CheckList;
     public static TextView DateTextView;
     public static TextView BankTextView;
@@ -148,12 +149,15 @@ public class MakeNewGroup extends AppCompatActivity {
                     //모든 항목 완성 시
                     JSONObject newGroup = new JSONObject();
                     try {
-                        newGroup.put("date",DateTextView.getText());
+
+                        newGroup.put("date",DateTextView.getText().toString().split("T")[0]);
+                        Log.e("MAKE DATE",DateTextView.getText().toString().split("T")[0]);
                         newGroup.put("title",Title.getText());
                         newGroup.put("price",Price.getText());
                         newGroup.put("account",Account.getText());
                         newGroup.put("bank",BankTextView.getText());
-                        newGroup.put("due",DueTextView.getText());
+                        newGroup.put("due",DueTextView.getText().toString().split("T")[0]);
+                        Log.e("MAKE DUE",DueTextView.getText().toString().split("T")[0]);
                         newGroup.put("period",PeriodTextView.getText());
                         newGroup.put("member",selectedJsonArray);
                         newGroup.put("hostphonenumber",((MainActivity)MainActivity.mContext).PN);
@@ -205,7 +209,7 @@ public class MakeNewGroup extends AppCompatActivity {
                 BankTextView.setText(listItemsFirstRow[i]);
             }
         });
-        builder.setTitle("Title");
+        builder.setTitle("Bank");
         builder.show();
     }
 

@@ -14,7 +14,7 @@
     <TextView
         android:layout_margin="5dp"
         android:id ="@+id/mTitle"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_alignParentTop="true"
@@ -35,14 +35,15 @@
         android:text="New Text"
         android:id="@+id/mHost"
         android:layout_alignTop="@+id/textView3"
-        android:layout_toRightOf="@+id/textView12"
-        android:layout_toEndOf="@+id/textView12" />
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/mFrom"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:text="AAAA"
         android:layout_below="@id/mTitle"
         android:layout_alignLeft="@id/mTitle" />
 
@@ -52,8 +53,8 @@
         android:text=" ~ "
         android:id="@+id/textView12"
         android:layout_alignTop="@+id/mFrom"
-        android:layout_toRightOf="@+id/mTitle"
-        android:layout_toEndOf="@+id/mTitle" />
+        android:layout_toRightOf="@+id/mFrom"
+        android:layout_toEndOf="@+id/mFrom" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,14 +66,16 @@
         android:layout_toEndOf="@+id/textView12" />
 
     <TextView
-        android:layout_margin="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:textSize = "15dp"
         android:id="@+id/mHavetoPay"
-        android:layout_alignTop="@+id/mHost"
-        android:layout_toRightOf="@+id/mHost"
-        android:layout_toEndOf="@+id/mHost" />
+        android:layout_marginRight="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="5dp"

@@ -58,7 +58,7 @@ public class MyGroupAdapter extends BaseAdapter {
         OneMyGroup mData = mListData.get(i);
 
         holder.mTitle.setText(mData.mTitle);
-        holder.mPrice.setText(mData.mPrice);
+        holder.mPrice.setText(mData.mPrice.toString());
         holder.mFrom.setText(mData.mFrom);
         holder.mTo.setText(mData.mTo);
         holder.mRest.setText(String.valueOf(mData.mRest));
