@@ -52,10 +52,7 @@ public class Tab1Fragment extends Fragment {
     ListView friendslistview;
     FriendsAdapter friendsAdapter;
 
-    public void gogo() {
-        Intent intent = new Intent(getActivity(),MakeNewGroup.class);
-        startActivity(intent);
-    }
+
     public Tab1Fragment() {
         // Required empty public constructor
     }
@@ -76,7 +73,7 @@ public class Tab1Fragment extends Fragment {
         rootView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gogo();
+                new FriendsTask().execute(URL+PORT+"/api/match_phonenumber",contactList.toString());
             }
         });
         //first 주소록 리스트 가져옴

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -35,9 +36,9 @@ public class HttpConnectionThread extends AsyncTask<String,Void, String> {
             conn.getOutputStream();
             OutputStream os =  conn.getOutputStream();
 
-            JSONArray jarray = null;
+            JSONObject jarray = null;
             try {
-                jarray = new JSONArray(url[1]);
+                jarray = new JSONObject(url[1]);
                 os.write(jarray.toString().getBytes("UTF-8"));
             } catch (JSONException e) {
                 e.printStackTrace();

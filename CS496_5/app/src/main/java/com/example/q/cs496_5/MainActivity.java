@@ -52,12 +52,16 @@ import java.util.Arrays;
 
 public class MainActivity extends FragmentActivity {
     public static CallbackManager callbackManager;
+    public static Object mContext;
+    public String PN,username;
 
     TextView PhoneTextView,MsgTextView;
     EditText IdEditView, PwEditView;
     Button LoginBtn, RegisterBtn;
     String response = null;
-    String id, pw, responseData ;
+
+
+    String  id, pw, responseData ;
 
     String URL = "http://143.248.48.69:";
     String PORT = "8080";
@@ -71,6 +75,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         // FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+        mContext = this;
      /*   Intent intent = new Intent(MainActivity.this, MakeNewGroup.class);
         startActivity(intent);*/
         callbackManager = CallbackManager.Factory.create(); //로그인 응답을 처리할 콜백 관리자 생성
@@ -200,11 +205,11 @@ public class MainActivity extends FragmentActivity {
                        // MsgTextView.setText("Wrong id or password");
                     } else {
                         //MsgTextView.setText("Login Success");
-                        Log.e("AA","ASDASDasd");
-
-
+                        PN = jRes.getString("phonenumber");
+                        username = jRes.getString("username");
+                        Log.e("LOGIN OK",PN);
                         Intent intent = new Intent(MainActivity.this, MyActivity.class);
-                        intent.putExtra("id", id);
+
                         startActivity(intent);
                     }
                 } catch (JSONException e) {

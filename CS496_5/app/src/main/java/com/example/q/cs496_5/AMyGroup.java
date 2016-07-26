@@ -5,46 +5,52 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AGroup extends AppCompatActivity {
-
-    TextView vTitle, vDate, vDue, vMembers, vPrice, vAccount,vHavetoPay;
+/* @@@@@@@@@@@@@@@@@@@@@@@@
+ In Case I am a Host !!
+ */
+public class AMyGroup extends AppCompatActivity {
+    TextView vTitle, vDate, vDue, vMembers, vPrice, vAccount,vRest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agroup);
+        setContentView(R.layout.activity_amy_group);
         vTitle = (TextView)findViewById(R.id.mTitle);
         vDate = (TextView)findViewById(R.id.mDate);
         vDue = (TextView)findViewById(R.id.mDue);
         // vMembers
         vPrice = (TextView)findViewById(R.id.mPrice);
         vAccount = (TextView)findViewById(R.id.mBank);
-        vHavetoPay = (TextView)findViewById(R.id.mHavetoPay);
+        vRest = (TextView)findViewById(R.id.mRestReceive);
+
 
         Intent intent = getIntent();
-        String temp = intent.getStringExtra("GroupInfo");
+        String temp = intent.getStringExtra("GropInfo");
         try {
             JSONObject groupinfo = new JSONObject(temp);
-            String title, date, due, members,bank, account;
-            Integer  price, n, havetopay;
+            String title, date, due, bank, account;
+            JSONArray  members;
+            Integer n, price, rest;
             title = groupinfo.getString("title");
             date = groupinfo.getString("date");
             due = groupinfo.getString("due");
-            //members = groupinfo.getString("members");
+            members = groupinfo.getJSONArray("member");
             price = groupinfo.getInt("price");
             bank = groupinfo.getString("bank");
             account = groupinfo.getString("account");
             n = groupinfo.getInt("n");
-            havetopay = price;
+            rest = price/n*members.length();
 
             vTitle.setText(title);
             vDate.setText(date);
             vDue.setText(due);
             vPrice.setText(price);
             vAccount.setText(bank + "/" + account);
-            vHavetoPay.setText(havetopay);
+            vRest.setText(rest);
+
 
         } catch (JSONException e) {
             e.printStackTrace();

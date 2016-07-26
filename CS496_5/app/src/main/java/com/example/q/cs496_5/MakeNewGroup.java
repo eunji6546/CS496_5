@@ -156,6 +156,9 @@ public class MakeNewGroup extends AppCompatActivity {
                         newGroup.put("due",DueTextView.getText());
                         newGroup.put("period",PeriodTextView.getText());
                         newGroup.put("member",selectedJsonArray);
+                        newGroup.put("hostphonenumber",((MainActivity)MainActivity.mContext).PN);
+                        newGroup.put("hostname",((MainActivity)MainActivity.mContext).username);
+                        newGroup.put("n",String.valueOf(selectedJsonArray.length()));
 
                        /* new AsyncTask<>(){
 
@@ -165,11 +168,10 @@ public class MakeNewGroup extends AppCompatActivity {
                             }
                         }.execute()*/
                         //서버에 날리기
-                        new HttpConnectionThread().execute("유알엘 넣기 ",newGroup.toString());
+                        new HttpConnectionThread().execute("http://143.248.48.69:8080/api/createroom",newGroup.toString());
 
                         // 인텐트 넘어감
-                        Intent intent = new Intent(MakeNewGroup.this,AGroup.class);
-                        intent.putExtra("GropInfo",newGroup.toString());
+                        Intent intent = new Intent(MakeNewGroup.this,MyActivity.class);
                         startActivity(intent);
 
                     } catch (JSONException e) {
@@ -239,7 +241,7 @@ public class MakeNewGroup extends AppCompatActivity {
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            DateTextView.setText(String.format("%d / %d / %d",year,month+1,day));
+            DateTextView.setText(String.format("%d-%d-%d",year,month+1,day));
         }
     }
     public static class DatePickerFragment2 extends DialogFragment

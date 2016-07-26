@@ -29,7 +29,8 @@
             android:label="APP_NAME" />
         <activity android:name=".Register" />
         <activity android:name=".MakeNewGroup" />
-        <activity android:name=".AGroup"></activity>
+        <activity android:name=".AGroup" />
+        <activity android:name=".AMyGroup"></activity>
     </application>
 
 </manifest>
