@@ -4,11 +4,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.q.cs496_5.Tab3Fragment">
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:background="@drawable/plus"
         android:id="@+id/createBtn"
-        android:layout_gravity="right|top" />
+        android:layout_gravity="right|bottom" />
 
     <ListView
         android:layout_width="wrap_content"

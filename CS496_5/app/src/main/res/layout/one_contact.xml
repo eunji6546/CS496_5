@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/mPhoto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:src="@drawable/blank_user_profile"
         />
 
@@ -16,9 +16,10 @@
         android:id ="@+id/mName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/mPhoto"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:text="AAAAAA"/>
 
@@ -26,7 +27,7 @@
         android:id="@+id/mPhone"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_below="@id/mName"
         android:layout_alignLeft="@id/mName" />
 
@@ -38,8 +39,8 @@
         android:id="@+id/textView"
         android:textColor="#990000"
         android:layout_alignBottom="@+id/mName"
-        android:layout_toRightOf="@+id/mName"
-        android:layout_toEndOf="@+id/mName" />
+        android:layout_toLeftOf="@+id/mPlus"
+         />
 
     <TextView
         android:layout_marginLeft="3dp"
@@ -50,8 +51,7 @@
         android:textColor="#990000"
         android:id="@+id/mPlus"
         android:layout_alignBottom="@+id/mName"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:gravity="right"/>
 
     <TextView
         android:layout_width="wrap_content"

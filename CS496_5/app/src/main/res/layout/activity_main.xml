@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:text="LOGIN"
         android:id="@+id/loginBtn"
+        android:backgroundTintMode="add"
+
         android:layout_alignTop="@+id/mPw"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="78dp" />
@@ -46,6 +48,8 @@
         android:text="REGISTER"
         android:id="@+id/registerBtn"
         android:layout_below="@+id/loginBtn"
+        android:layout_marginTop="10dp"
+        android:backgroundTintMode="add"
         android:layout_alignLeft="@+id/loginBtn"
         android:layout_alignStart="@+id/loginBtn" />
 
@@ -53,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text=""
         android:id="@+id/msgText"
         android:layout_alignTop="@+id/mPw"
         android:layout_centerHorizontal="true"
@@ -68,9 +72,7 @@
         android:textColor="#666666"
         android:id="@+id/mPhone"
         android:layout_above="@+id/mId"
-        android:layout_alignLeft="@+id/mId"
-        android:layout_marginLeft="5dp"
-        android:layout_alignStart="@+id/mId"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp" />
 
     <ImageView

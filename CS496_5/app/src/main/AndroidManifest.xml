@@ -63,10 +63,13 @@
         </activity>
         <activity
             android:name=".MyActivity"
-            android:label="APP_NAME" />
-        <activity android:name=".Register" />
-        <activity android:name=".MakeNewGroup" />
-        <activity android:name=".AGroup" />
+            android:label="I AM A DEBTOR" />
+        <activity android:name=".Register"
+            android:label="Registration Page" />
+        <activity android:name=".MakeNewGroup"
+            android:label="Make New Group"/>
+        <activity android:name=".AGroup"
+            android:label="ROOM - I Need to Pay"/>
         <activity android:name=".AMyGroup" />
         <activity android:name=".GCMTest"></activity>
     </application>

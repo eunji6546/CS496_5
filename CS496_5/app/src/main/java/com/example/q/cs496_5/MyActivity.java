@@ -170,9 +170,9 @@ public class MyActivity extends AppCompatActivity {
                 case 0:
                     return "friends";
                 case 1:
-                    return "채팅list";
+                    return "TO PAY";
                 case 2:
-                    return "others";
+                    return "TO RECEIVE";
             }
             return null;
         }

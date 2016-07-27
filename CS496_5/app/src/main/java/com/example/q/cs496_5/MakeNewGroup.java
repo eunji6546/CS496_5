@@ -144,8 +144,16 @@ public class MakeNewGroup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if ( DateTextView.getText()!="Pick Date" && Title.getText()!=null && Price.getText()!=null && Account.getText()!=null && BankTextView.getText()!="Bank" && DueTextView.getText()!="Pick Due Date" && DueTextView.getText()!="Per # Hour"
-                        && MemberTextView.getText()!=null){
+                if ( Title.getText().toString().equals("")){
+                    Log.e("MK NEW GRP", "Y");
+                }
+                Log.e("MK NEW GRP", "N");
+
+               if ( DateTextView.getText().toString()!="Pick Date" && !Title.getText().toString().equals("")
+               && !Price.getText().toString().equals("") && !Account.getText().toString().equals("")
+               && !BankTextView.getText().toString().equals("Bank") && !DueTextView.getText().toString().equals("Pick Due Date")
+               && !DueTextView.getText().toString().equals("Per # Hour")
+                        && !MemberTextView.getText().toString().equals("")){
                     //모든 항목 완성 시
                     JSONObject newGroup = new JSONObject();
                     try {
@@ -157,20 +165,13 @@ public class MakeNewGroup extends AppCompatActivity {
                         newGroup.put("account",Account.getText());
                         newGroup.put("bank",BankTextView.getText());
                         newGroup.put("due",DueTextView.getText().toString().split("T")[0]);
-                        Log.e("MAKE DUE",DueTextView.getText().toString().split("T")[0]);
                         newGroup.put("period",PeriodTextView.getText());
                         newGroup.put("member",selectedJsonArray);
                         newGroup.put("hostphonenumber",((MainActivity)MainActivity.mContext).PN);
                         newGroup.put("hostname",((MainActivity)MainActivity.mContext).username);
                         newGroup.put("n",String.valueOf(selectedJsonArray.length()));
 
-                       /* new AsyncTask<>(){
 
-                            @Override
-                            protected Object doInBackground(Object[] objects) {
-                                return null;
-                            }
-                        }.execute()*/
                         //서버에 날리기
                         new HttpConnectionThread().execute("http://143.248.48.69:8080/api/createroom",newGroup.toString());
 
@@ -183,8 +184,10 @@ public class MakeNewGroup extends AppCompatActivity {
                     }
 
                 }else{
-                    Toast.makeText(MakeNewGroup.this,"모두 채우시오",Toast.LENGTH_LONG);
+                    Toast.makeText(MakeNewGroup.this,"모두 채우시오",Toast.LENGTH_LONG).show();
                 }
+
+
             }
         });
     }

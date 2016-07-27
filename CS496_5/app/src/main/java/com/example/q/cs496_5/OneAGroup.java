@@ -10,6 +10,6 @@ public class OneAGroup {
     public String mTo;
     public Integer mPrice;
     public Integer mN;
-    public Double mHaveToPay;
+    public double mHaveToPay;
     public String mGroupinfo;
 }

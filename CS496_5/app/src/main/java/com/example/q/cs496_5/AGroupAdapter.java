@@ -61,7 +61,7 @@ public class AGroupAdapter extends BaseAdapter {
         holder.mHost.setText(mData.mHost);
         holder.mFrom.setText(mData.mFrom);
         holder.mTo.setText(mData.mTo);
-        holder.mHavetoPay.setText(String.valueOf(mData.mHaveToPay));
+        holder.mHavetoPay.setText(String.valueOf((int)mData.mHaveToPay));
         holder.mGroupInfo.setText(mData.mGroupinfo);
 
         return convertView;

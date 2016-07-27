@@ -51,48 +51,47 @@ public class Register extends AppCompatActivity {
                 name = Name.getText().toString();
                 id = Id.getText().toString();
                 pw = Pw.getText().toString();
-/*
-                {
+                Log.e("REGTSTER",phone+"@@");
 
-                    "name" : "박채훈",
-
-                        "userid" : "hi",
-
-                        "password" : "12345",
-
-                        "phonenumber" : "01041843369"
-
-                }*/
                 JSONObject jobj = new JSONObject();
 
-                try {
-                    jobj.put("name",name);
-                    jobj.put("userid",id);
-                    jobj.put("password",pw);
-                    String temp = phone.substring(phone.length()-4);
-                    String temp2 = phone.substring(0,3);
-                    String temp3 = phone.substring(3,phone.length()-4);
-                    String real = temp2+"-"+temp3+"-"+temp;
+               // if ( !phone.equals("") && !name.equals("") && !id.equals("") && !pw.equals("")){
 
-                    jobj.put("phonenumber",real);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (phone == null) {
-                    MsgTextView.setText("휴대폰번호를 입력하세요.");
-                } else if (name == null) {
-                    MsgTextView.setText("이름을 입력하세요.");
-                } else if (id == null) {
-                    MsgTextView.setText("ID를 입력하세요.");
-                } else if (pw == null) {
-                    MsgTextView.setText("비밀번호를 입력하세요.");
-                } else {
-                    MsgTextView.setText("");
-                    //서버에 날리기
-                    new RegisterTask().execute(URL+PORT+"/api/adduser",jobj.toString());
-                }
 
+                    if (phone.equals("")) {
+                        MsgTextView.setText("휴대폰번호를 입력하세요.");
+                    } else if (name.equals("") ) {
+                        MsgTextView.setText("이름을 입력하세요.");
+                    } else if (id.equals("")) {
+                        MsgTextView.setText("ID를 입력하세요.");
+                    } else if (pw.equals("")) {
+                        MsgTextView.setText("비밀번호를 입력하세요.");
+                    } else {
+
+                        MsgTextView.setText("로그인중..");
+                        try {
+
+                            jobj.put("name",name);
+                            jobj.put("userid",id);
+                            jobj.put("password",pw);
+                            String temp = phone.substring(phone.length()-4);
+                            String temp2 = phone.substring(0,3);
+                            String temp3 = phone.substring(3,phone.length()-4);
+                            String real = temp2+"-"+temp3+"-"+temp;
+
+                            jobj.put("phonenumber",real);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //서버에 날리기
+                        new RegisterTask().execute(URL+PORT+"/api/adduser",jobj.toString());
+                    }
+               // }else {
+                //    Log.e("LL","NOTNTONTOTNTO");
+                 //   Toast.makeText(Register.this, "모두 채우세요", Toast.LENGTH_LONG).show();
+               // }
             }
         });
     }

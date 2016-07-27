@@ -84,8 +84,8 @@ public class AGroup extends AppCompatActivity {
             String title, date, due, bank, account;
             Integer  price, n, havetopay;
             title = groupinfo.getString("title");
-            date = groupinfo.getString("date");
-            due = groupinfo.getString("due");
+            date = groupinfo.getString("date").split("T")[0];
+            due = groupinfo.getString("due").split("T")[0];
             hostname = groupinfo.getString("hostname");
             hostphonenumber = groupinfo.getString("hostphonenumber");
             roomnumber = groupinfo.getString("roomnumber");
@@ -94,14 +94,14 @@ public class AGroup extends AppCompatActivity {
             bank = groupinfo.getString("bank");
             account = groupinfo.getString("account");
             n = Integer.parseInt(groupinfo.getString("n"));
-            havetopay = price;
+            havetopay = (int)((double)price/n);
 
             vTitle.setText(title);
             vHost.setText(hostname);
             vDate.setText(date);
             vDue.setText(due);
             vPrice.setText(price.toString());
-            vAccount.setText(bank + "/" + account);
+            vAccount.setText(bank + " / " + account);
             vHavetoPay.setText(havetopay.toString());
 
         } catch (JSONException e) {
