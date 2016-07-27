@@ -153,6 +153,7 @@ public class Tab1Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

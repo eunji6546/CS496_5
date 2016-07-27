@@ -7,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -58,12 +60,22 @@ public class MainActivity extends FragmentActivity {
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
     int  MY_PERMISSIONS_REQUEST_WRITE_CONTACTS = 102;
 
+
+
+    final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            MsgTextView.setText("Wrong id or password");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-        mContext = this;/*
+        mContext = this;
+        /*
       Intent intent = new Intent(MainActivity.this, GCMTest.class);
         startActivity(intent);*/
 
@@ -190,7 +202,8 @@ public class MainActivity extends FragmentActivity {
                     Log.e("AAa",res);
                     if (res.equals("Failed!")) {
                         // fail to log in
-                       // MsgTextView.setText("Wrong id or password");
+                        Message msg = handler.obtainMessage();
+                        handler.sendMessage(msg);
                     } else {
                         //MsgTextView.setText("Login Success");
                         PN = jRes.getString("phonenumber");
