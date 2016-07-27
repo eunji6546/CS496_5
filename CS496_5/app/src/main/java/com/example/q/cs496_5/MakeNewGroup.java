@@ -195,7 +195,8 @@ public class MakeNewGroup extends AppCompatActivity {
                         newGroup.put("member",selectedJsonArray);
                         newGroup.put("hostphonenumber",((MainActivity)MainActivity.mContext).PN);
                         newGroup.put("hostname",((MainActivity)MainActivity.mContext).username);
-                        newGroup.put("n",String.valueOf(selectedJsonArray.length()));
+                        newGroup.put("n",String.valueOf(selectedJsonArray.length()+1));
+                        Log.e("######",String.valueOf(selectedJsonArray.length()+1));
                         newGroup.put("image",encoded);
 
 

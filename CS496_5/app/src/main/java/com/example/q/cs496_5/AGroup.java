@@ -25,8 +25,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Calendar;
 
 public class AGroup extends AppCompatActivity {
@@ -63,7 +65,7 @@ public class AGroup extends AppCompatActivity {
                     Toast.makeText(AGroup.this, "날짜를 입력하세요",Toast.LENGTH_LONG).show();
                 }else{
                     // 서버에 알리기 ! host에게 push 를 보내라고
-                    JSONObject sendData = new JSONObject();
+                    /*JSONObject sendData = new JSONObject();
                     try {
                         sendData.put("hostname",hostname);
                         sendData.put("hostphonenumber",hostphonenumber);
@@ -74,9 +76,16 @@ public class AGroup extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
-                    new IPaidTask().execute("http://143.248.48.69:8080/api/pay_call",sendData.toString());
+                    Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+
+                    try {
+                        new IPaidTask().execute("http://143.248.48.69:8080/api/push_pay/"+ URLEncoder.encode(((MainActivity)MainActivity.mContext).username, "UTF-8") +"/"+roomnumber, "");
+                    } catch (UnsupportedEncodingException e) {
+                        Log.e("&&&","&&&&&&&&&&&&&&&&&&&7");
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -163,50 +172,49 @@ public class AGroup extends AppCompatActivity {
 
             Log.e("HttpConnectionThread", "I'm in");
             try {
-                murl = new URL(params[0]);
-                Log.e("HH",murl.toString());
-                HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("GET");
-                Log.e("HH","AAAAAA");
-                // conn.setRequestProperty("Accept", "application/json");
-                conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
-                conn.setRequestProperty("Accept-Charset", "UTF-8");
-                Log.e("HH","BBBBBBBBB");
+                try {
+                    murl = new URL(params[0]);
+                    Log.e("HH",murl.toString());
+                    HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
+                    conn.setReadTimeout(10000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("GET");
+                    Log.e("HH","AAAAAA");
+                    // conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+                    conn.setRequestProperty("Accept-Charset", "UTF-8");
+                    Log.e("HH","BBBBBBBBB");
 
-                conn.connect();
-                Log.e("HH","qqqqqqqqqqqqqCC");
-                response = conn.getResponseMessage();
+                    conn.connect();
+                    Log.e("HH","qqqqqqqqqqqqqCC");
+                    response = conn.getResponseMessage();
 
-                Log.e("HH","kkkkkCCC");
-                is = conn.getInputStream();
-                Log.e("HH","CCCCCCCCCC");
+                    Log.e("HH","kkkkkCCC");
+                    is = conn.getInputStream();
+                    Log.e("HH","CCCCCCCCCC");
 //            // Convert the InputStream into a string
 //            String contentAsString = readIt(is, len);
 //           // Log.e("@@",contentAsString);
 //            return contentAsString;
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader( conn.getInputStream() )
-                );
-                Log.e("HH","DDDDDDDDDDDDDDdC");
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader( is )
+                    );
+                    Log.e("HH","DDDDDDDDDDDDDDdC");
 
-                JSONArray jsonResponse = null;
-                //initiate strings to hold response data
-                String inputLine;
-                responseData = "";
-                //read the InputStream with the BufferedReader line by line and add each line to responseData
-                while ( ( inputLine = in.readLine() ) != null ){
-                    responseData += inputLine;
+                    JSONArray jsonResponse = null;
+                    //initiate strings to hold response data
+                    String inputLine;
+                    responseData = "";
+                    //read the InputStream with the BufferedReader line by line and add each line to responseData
+                    while ( ( inputLine = in.readLine() ) != null ){
+                        responseData += inputLine;
+                    }
+                }finally {
+                    if (is != null){
+                        is.close();
+                    }
                 }
-                try {
-                    JSONObject jRes = new JSONObject(responseData);
-                    Log.e("RESPON",jRes.toString());
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             } catch (IOException e) {
                 Log.e("HH","AAAAAasdfasdfasdfA");
             }

@@ -89,41 +89,49 @@ public class Tab2Fragment extends Fragment {
 
             Log.e("HttpConnectionThread", "I'm in");
             try {
-                murl = new URL(params[0]);
-                Log.e("HH",murl.toString());
-                HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("GET");
-                Log.e("HH","AAAAAA");
-                // conn.setRequestProperty("Accept", "application/json");
-                conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
-                conn.setRequestProperty("Accept-Charset", "UTF-8");
-                Log.e("HH","BBBBBBBBB");
+                try{
+                    murl = new URL(params[0]);
+                    Log.e("HH",murl.toString());
+                    HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
+                    conn.setReadTimeout(10000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("GET");
+                    Log.e("HH","AAAAAA");
+                    // conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+                    conn.setRequestProperty("Accept-Charset", "UTF-8");
+                    Log.e("HH","BBBBBBBBB");
 
-                conn.connect();
-                Log.e("HH","qqqqqqqqqqqqqCC");
-                response = conn.getResponseMessage();
+                    conn.connect();
+                    Log.e("HH","qqqqqqqqqqqqqCC");
+                    response = conn.getResponseMessage();
 
-                Log.e("HH","kkkkkCCC");
-                is = conn.getInputStream();
-                Log.e("HH","CCCCCCCCCC");
+                    Log.e("HH","kkkkkCCC");
+                    is = conn.getInputStream();
+                    Log.e("HH","CCCCCCCCCC");
 //            // Convert the InputStream into a string
 //            String contentAsString = readIt(is, len);
 //           // Log.e("@@",contentAsString);
 //            return contentAsString;
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader( conn.getInputStream() )
-                );
-                Log.e("HH","DDDDDDDDDDDDDDdC");
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader( is )
+                    );
+                    Log.e("HH","DDDDDDDDDDDDDDdC");
 
-                //initiate strings to hold response data
-                String inputLine;
-                responseData = "";
-                //read the InputStream with the BufferedReader line by line and add each line to responseData
-                while ( ( inputLine = in.readLine() ) != null ){
-                    responseData += inputLine;
+                    //initiate strings to hold response data
+                    String inputLine;
+                    responseData = "";
+                    //read the InputStream with the BufferedReader line by line and add each line to responseData
+                    while ( ( inputLine = in.readLine() ) != null ){
+                        responseData += inputLine;
+                    }
+                }finally {
+                    if (is != null){
+                        is.close();
+                    }
                 }
+
+
                 try {
                     JSONObject jRes = new JSONObject(responseData);
                     Log.e("GOT RES",jRes.toString());

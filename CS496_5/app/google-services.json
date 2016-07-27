@@ -1,12 +1,12 @@
 {
   "project_info": {
-    "project_number": "1098395675745",
-    "project_id": "firebase-debtor"
+    "project_number": "232559993035",
+    "project_id": "i-am-a-debtor"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1098395675745:android:e0692d886954e2cb",
+        "mobilesdk_app_id": "1:232559993035:android:e0692d886954e2cb",
         "android_client_info": {
           "package_name": "com.example.q.cs496_5"
         }
@@ -14,7 +14,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAxCk_Rk2jx9p-TS7j8bhjkJTasXM5AS-0"
+          "current_key": "AIzaSyBO0D4zvDd9Hc_bI1phJ1Fv53K5K77qv6g"
         }
       ],
       "services": {

@@ -129,6 +129,9 @@ public class AMyGroup extends AppCompatActivity {
                                     //보내기 !!
                                     new RemoveTask().execute( "http://143.248.48.69:8080/api/remove_payperson/"+roomnumber+"/"+userphonenumbers[position],"");
                                     finish();
+                                    Intent intent = new Intent(AMyGroup.this,MyActivity.class);
+                                    startActivity(intent);
+
                                 }
                             }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         @Override
@@ -164,41 +167,49 @@ public class AMyGroup extends AppCompatActivity {
 
             Log.e("HttpConnectionThread", "I'm in");
             try {
-                murl = new URL(params[0]);
-                Log.e("HH",murl.toString());
-                HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("GET");
-                Log.e("HH","AAAAAA");
-                // conn.setRequestProperty("Accept", "application/json");
-                conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
-                conn.setRequestProperty("Accept-Charset", "UTF-8");
-                Log.e("HH","BBBBBBBBB");
+                try{
 
-                conn.connect();
-                Log.e("HH","qqqqqqqqqqqqqCC");
-                response = conn.getResponseMessage();
+                    murl = new URL(params[0]);
+                    Log.e("HH",murl.toString());
+                    HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
+                    conn.setReadTimeout(10000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("GET");
+                    Log.e("HH","AAAAAA");
+                    // conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+                    conn.setRequestProperty("Accept-Charset", "UTF-8");
+                    Log.e("HH","BBBBBBBBB");
 
-                Log.e("HH","kkkkkCCC");
-                is = conn.getInputStream();
-                Log.e("HH","CCCCCCCCCC");
+                    conn.connect();
+                    Log.e("HH","qqqqqqqqqqqqqCC");
+                    response = conn.getResponseMessage();
+
+                    Log.e("HH","kkkkkCCC");
+                    is = conn.getInputStream();
+                    Log.e("HH","CCCCCCCCCC");
 //            // Convert the InputStream into a string
 //            String contentAsString = readIt(is, len);
 //           // Log.e("@@",contentAsString);
 //            return contentAsString;
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader( conn.getInputStream() )
-                );
-                Log.e("HH","DDDDDDDDDDDDDDdC");
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader( conn.getInputStream() )
+                    );
+                    Log.e("HH","DDDDDDDDDDDDDDdC");
 
-                JSONArray jsonResponse = null;
-                //initiate strings to hold response data
-                String inputLine;
-                responseData = "";
-                //read the InputStream with the BufferedReader line by line and add each line to responseData
-                while ( ( inputLine = in.readLine() ) != null ){
-                    responseData += inputLine;
+                    JSONArray jsonResponse = null;
+                    //initiate strings to hold response data
+                    String inputLine;
+                    responseData = "";
+                    //read the InputStream with the BufferedReader line by line and add each line to responseData
+                    while ( ( inputLine = in.readLine() ) != null ){
+                        responseData += inputLine;
+                    }
+
+                }finally {
+                    if (is != null){
+                        is.close();
+                    }
                 }
 
             } catch (IOException e) {

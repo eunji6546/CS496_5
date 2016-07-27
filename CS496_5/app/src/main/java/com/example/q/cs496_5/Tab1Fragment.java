@@ -202,19 +202,30 @@ public class Tab1Fragment extends Fragment {
                 }
                 os.flush();
                 os.close();
-                response = conn.getResponseMessage();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader( conn.getInputStream() )
-                );
-                Log.e("HH","DDDDDDDDDDDDDDdC");
+                InputStream is = conn.getInputStream();
+                try{
 
-                //initiate strings to hold response data
-                String inputLine;
-                responseData = "";
-                //read the InputStream with the BufferedReader line by line and add each line to responseData
-                while ( ( inputLine = in.readLine() ) != null ){
-                    responseData += inputLine;
+
+                    response = conn.getResponseMessage();
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader( is )
+                    );
+                    Log.e("HH","DDDDDDDDDDDDDDdC");
+
+                    //initiate strings to hold response data
+                    String inputLine;
+                    responseData = "";
+                    //read the InputStream with the BufferedReader line by line and add each line to responseData
+                    while ( ( inputLine = in.readLine() ) != null ){
+                        responseData += inputLine;
+                    }
+                }finally {
+                    if (is != null){
+                        is.close();
+                    }
                 }
+
+
                 try {
                    JSONArray jRes = new JSONArray(responseData);
                     /////////////////////////////////////
