@@ -130,7 +130,7 @@ public class Tab2Fragment extends Fragment {
                     JSONArray paylist = jRes.getJSONArray("pay");
                     for( int i=0; i<paylist.length(); i++){
                         JSONObject one = (JSONObject) paylist.get(i);
-                        String date, hostname, hostpn, title, account, bank, due, period;
+                        String date, hostname, hostpn, title, account, bank, due, period,img;
                         JSONArray member;
                         Integer n, price;
                         date = one.getString("date").split("T")[0];
@@ -144,8 +144,9 @@ public class Tab2Fragment extends Fragment {
                         member = one.getJSONArray("member");
                         price = one.getInt("price");
                         n = one.getInt("n");
+                        img = one.getString("image");
 
-                        aGroupAdapter.addItem(title,hostname,date,due,price,n,one.toString());
+                        aGroupAdapter.addItem(title,hostname,date,due,price,n,one.toString(),img);
                     }
                     Message msg = handler.obtainMessage();
                     handler.sendMessage(msg);

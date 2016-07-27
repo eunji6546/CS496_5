@@ -3,13 +3,17 @@ package com.example.q.cs496_5;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +31,8 @@ import java.util.Calendar;
 
 public class AGroup extends AppCompatActivity {
     String response , responseData;
-    TextView vTitle, vDate, vDue, vMembers, vPrice, vAccount,vHavetoPay,vHost;
+    TextView vTitle, vDate, vDue, vPrice, vAccount,vHavetoPay,vHost;
+    ImageView vPhoto;
     String hostname, hostphonenumber,roomnumber;
     static TextView vSendDatePick;
     @Override
@@ -48,10 +53,12 @@ public class AGroup extends AppCompatActivity {
 
         vSendDatePick = (TextView)findViewById(R.id.mSendDate);
 
+        vPhoto = (ImageView)findViewById(R.id.mImage);
+
         findViewById(R.id.pushBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (vSendDatePick.getText().equals("Select Paid Date")){
+                if (vSendDatePick.getText().toString().equals("Select Paid Date")){
                     // did not select date;
                     Toast.makeText(AGroup.this, "날짜를 입력하세요",Toast.LENGTH_LONG).show();
                 }else{
@@ -81,7 +88,7 @@ public class AGroup extends AppCompatActivity {
 
         try {
             JSONObject groupinfo = new JSONObject(temp);
-            String title, date, due, bank, account;
+            String title, date, due, bank, account, imgstring;
             Integer  price, n, havetopay;
             title = groupinfo.getString("title");
             date = groupinfo.getString("date").split("T")[0];
@@ -96,6 +103,15 @@ public class AGroup extends AppCompatActivity {
             n = Integer.parseInt(groupinfo.getString("n"));
             havetopay = (int)((double)price/n);
 
+            imgstring = groupinfo.getString("image");
+            if (imgstring.equals("NONE")){
+                Log.e("A GROUP", "I DON T HAVE IMAGE ");
+            } else {
+                Bitmap bitmap = decodeToBase64(imgstring);
+                vPhoto.setImageBitmap(bitmap);
+            }
+
+
             vTitle.setText(title);
             vHost.setText(hostname);
             vDate.setText(date);
@@ -108,8 +124,9 @@ public class AGroup extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new MakeNewGroup.DatePickerFragment();
+        DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
     public static class DatePickerFragment extends DialogFragment
@@ -202,6 +219,10 @@ public class AGroup extends AppCompatActivity {
         }
     }
 
+    public static Bitmap decodeToBase64(String input){
+        byte[] decodeByte = Base64.decode(input,0);
+        return BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
+    }
 
 
 

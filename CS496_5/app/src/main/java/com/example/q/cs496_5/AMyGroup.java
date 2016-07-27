@@ -3,15 +3,19 @@ package com.example.q.cs496_5;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,6 +38,7 @@ import java.util.List;
  */
 public class AMyGroup extends AppCompatActivity {
     TextView vTitle, vDate, vDue, vPrice, vAccount,vRest;
+    ImageView vPhoto;
     ListView vMembers;
     String [] Members;
     String response , responseData;
@@ -53,6 +58,7 @@ public class AMyGroup extends AppCompatActivity {
         vRest = (TextView)findViewById(R.id.mRestReceive);
 
         vMembers = (ListView)findViewById(R.id.unpaidPeopleListView);
+        vPhoto = (ImageView)findViewById(R.id.mImage);
 
 
 
@@ -60,7 +66,7 @@ public class AMyGroup extends AppCompatActivity {
         String temp = intent.getStringExtra("GroupInfo");
         try {
             JSONObject groupinfo = new JSONObject(temp);
-            String title, date, due, bank, account;
+            String title, date, due, bank, account,imgstring;
             JSONArray  members;
             Integer n, price, rest;
             title = groupinfo.getString("title");
@@ -74,6 +80,13 @@ public class AMyGroup extends AppCompatActivity {
             rest = price/n*members.length();
             roomnumber = groupinfo.getString("roomnumber");
 
+            imgstring = groupinfo.getString("image");
+            if (imgstring.equals("NONE")){
+                Log.e("A GROUP", "I DON T HAVE IMAGE ");
+            } else {
+                Bitmap bitmap = decodeToBase64(imgstring);
+                vPhoto.setImageBitmap(bitmap);
+            }
 
             vTitle.setText(title);
             vDate.setText(date);
@@ -133,6 +146,9 @@ public class AMyGroup extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showDatePickerDialog(View view) {
     }
 
     private class RemoveTask extends AsyncTask<String, Void, String> {
@@ -227,4 +243,8 @@ public class AMyGroup extends AppCompatActivity {
 
     }
 
+    public static Bitmap decodeToBase64(String input){
+        byte[] decodeByte = Base64.decode(input,0);
+        return BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
+    }
 }

@@ -8,7 +8,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_margin="5dp"
+        android:layout_margin="7dp"
         />
 
     <TextView
@@ -71,8 +71,7 @@
         android:text="New Text"
         android:textSize = "15dp"
         android:id="@+id/mHavetoPay"
-        android:layout_marginRight="62dp"
-        android:layout_marginEnd="62dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="15dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -86,6 +85,16 @@
         android:layout_below="@+id/mHost"
         android:layout_toRightOf="@+id/mHavetoPay"
         android:layout_toEndOf="@+id/mHavetoPay" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&#65510;"
+        android:textStyle="bold"
+        android:id="@+id/textView15"
+        android:layout_alignBottom="@+id/mHavetoPay"
+        android:layout_toLeftOf="@+id/mHavetoPay"
+        android:layout_toStartOf="@+id/mHavetoPay" />
 
 
 </RelativeLayout>

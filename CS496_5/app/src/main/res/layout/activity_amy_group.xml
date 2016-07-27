@@ -8,10 +8,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.q.cs496_5.AMyGroup">
+
     <TextView
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="Date"
+        android:text="Title"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/a_group_label"
@@ -20,33 +21,21 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <TextView        android:layout_marginLeft="5dp"
-
-        android:layout_width="120dp"
+    <TextView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="New Text"
-        android:id="@+id/mDate"
+        android:id="@+id/mTitle"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4" />
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:text="Due"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/a_group_label"
-        android:background="@color/colorLabel"
-        android:id="@+id/textView7"
-        android:layout_above="@+id/textView5"
-        android:layout_toRightOf="@+id/mDate"
-        android:layout_toEndOf="@+id/mDate" />
 
 
     <TextView
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Date"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/a_group_label"
@@ -58,13 +47,37 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:layout_width="115dp"
-        android:layout_marginLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
-        android:id="@+id/mTitle"
+        android:id="@+id/mDate"
         android:layout_alignTop="@+id/textView5"
         android:layout_toRightOf="@+id/textView5"
         android:layout_toEndOf="@+id/textView5" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="Due"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/a_group_label"
+        android:background="@color/colorLabel"
+        android:id="@+id/textView7"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView5"
+        android:layout_toLeftOf="@+id/mDate"
+        android:layout_toStartOf="@+id/mDate" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/mDue"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7" />
 
     <TextView
         android:layout_width="60dp"
@@ -76,15 +89,16 @@
         android:textSize="@dimen/a_group_label"
         android:background="@color/colorLabel"
         android:id="@+id/textView6"
-        android:layout_alignTop="@+id/mTitle"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
+        android:layout_below="@+id/textView7"
+        android:layout_toLeftOf="@+id/mDue"
+        android:layout_toStartOf="@+id/mDue"
+        android:layout_marginTop="10dp"/>
 
     <TextView
 
         android:text="New Text"
-        android:layout_width="115dp"
-        android:layout_marginLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
         android:id="@+id/mPrice"
         android:layout_alignTop="@+id/textView6"
@@ -92,8 +106,35 @@
         android:layout_toEndOf="@+id/textView6" />
 
 
+
+
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Rest Receive"
+        android:id="@+id/textView11"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/a_group_label"
+        android:background="@color/colorLabel"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/mRestReceive"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginLeft="10dp"/>
+
+
+    <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -102,55 +143,24 @@
         android:background="@color/colorLabel"
         android:text="Account"
         android:id="@+id/textView8"
-        android:layout_below="@+id/mTitle"
+        android:layout_below="@+id/textView11"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"/>
 
     <TextView
-        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bank"
         android:textSize="@dimen/a_group_label"
         android:id="@+id/mBank"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8"
-        android:layout_alignTop="@+id/textView8" />
-
-
-
-    <TextView
-        android:layout_marginLeft="5dp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/mDue"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7" />
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Rest receive"
-        android:id="@+id/textView11"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/a_group_label"
-        android:background="@color/colorLabel"
         android:layout_below="@+id/textView8"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/mRestReceive"
-        android:layout_alignTop="@+id/textView11"
-        android:layout_alignLeft="@+id/mBank"
-        android:layout_alignStart="@+id/mBank" />
+        android:layout_alignParentStart="true"
+android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+
     <TextView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -159,14 +169,13 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/a_group_label"
-        android:layout_marginTop="10dp"
 
         android:background="@color/colorLabel"
         android:id="@+id/textView14"
-        android:layout_below="@+id/textView11"
+        android:layout_below="@+id/mBank"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"/>
     <ListView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -175,6 +184,15 @@
         android:layout_below="@+id/textView14"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:id="@+id/mImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:foregroundGravity="top|right"/>
 
 
 </RelativeLayout>

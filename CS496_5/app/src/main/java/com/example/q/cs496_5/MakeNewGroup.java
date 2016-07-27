@@ -5,13 +5,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListPopupWindow;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +41,7 @@ public class MakeNewGroup extends AppCompatActivity {
 
     String[] listItemsFirstRow = {"우리","국민","기업","농협","신한","하나","제일","경남","광주","대구","도이치",
             "부산","비엔피파리바","산립조합","산업","상호저축","새마을금고","수출입","수협","신협","우체국","전북","제주","kb투자증권" };
-    String[] listPeriodHour = {"3h","6h","9h","12h","1day","2day","3day","4day","5day","6day","7day","1month"};
+    String[] listPeriodHour = {"10sec","3h","6h","9h","12h","1day","2day","3day","4day","5day","6day","7day","1month"};
     String[] FriendList ;
     boolean[] CheckList;
     public static TextView DateTextView;
@@ -46,18 +51,27 @@ public class MakeNewGroup extends AppCompatActivity {
     public static TextView MemberTextView;
 
     public static EditText Title, Price,Account;
-    public static Button MakeButton,AddButton;
+    public static Button MakeButton,AddButton,CameraButton;
+
+    public static ImageView PhotoImageView;
 
     public static JSONArray jsonRes ;
     public static JSONArray selectedJsonArray;
 
     public JSONArray ContactL;
 
+    //For Image
+    Bitmap cameraimage = null;
+    String camerastring = null;
+    String encoded = "NONE";
+    String tosend = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_new_group);
+
         DateTextView = (TextView)findViewById(R.id.mDate);
         BankTextView = (TextView)findViewById(R.id.bankBtn);
         DueTextView = (TextView)findViewById(R.id.mDue);
@@ -68,12 +82,24 @@ public class MakeNewGroup extends AppCompatActivity {
         Account = (EditText)findViewById(R.id.editText3);
         AddButton = (Button)findViewById(R.id.addBtn);
         MemberTextView = (TextView)findViewById(R.id.members);
+        CameraButton = (Button)findViewById(R.id.cameraBtn);
+        PhotoImageView = (ImageView)findViewById(R.id.mImage);
 
 
         ContactL = ((MyActivity)MyActivity.mContext).ContactList;
         CheckList = new boolean[ContactL.length()];
 
 
+        CameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 카메라 뷰 켜야함
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 1234);
+
+            }
+        });
 
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +196,7 @@ public class MakeNewGroup extends AppCompatActivity {
                         newGroup.put("hostphonenumber",((MainActivity)MainActivity.mContext).PN);
                         newGroup.put("hostname",((MainActivity)MainActivity.mContext).username);
                         newGroup.put("n",String.valueOf(selectedJsonArray.length()));
+                        newGroup.put("image",encoded);
 
 
                         //서버에 날리기
@@ -192,6 +219,37 @@ public class MakeNewGroup extends AppCompatActivity {
         });
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1234){
+            try {
+                if (data.equals(null)){
+                    Log.e("CAMENRA","데이터 안왔음");
+                    return ;
+                }
+                Log.e("CAMENRA","데이터 왔음");
+                Bitmap bm = (Bitmap) data.getExtras().get("data");
+
+                //이미지 뷰에 띄우기
+                PhotoImageView.setImageBitmap(bm);
+                CameraButton.setVisibility(View.INVISIBLE);
+
+
+                //Bitmap to byteArray
+                ByteArrayOutputStream bytesoutput = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.PNG, 100, bytesoutput);
+                byte[] byteArray = bytesoutput.toByteArray();
+
+                //bytearray to BASE64 string
+                encoded = Base64.encodeToString(byteArray,Base64.DEFAULT);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+
+        }
+    }
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -250,6 +308,7 @@ public class MakeNewGroup extends AppCompatActivity {
             // Do something with the date chosen by the user
             DateTextView.setText(String.format("%d-%d-%d",year,month+1,day));
         }
+
     }
     public static class DatePickerFragment2 extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {

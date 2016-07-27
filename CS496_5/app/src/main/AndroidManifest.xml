@@ -36,7 +36,7 @@
         <service
             android:name=".MyGcmListenerService"
             android:exported="false">
-            <intent-filter>
+            <intent-filter android:priority="10000">
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
@@ -70,7 +70,8 @@
             android:label="Make New Group"/>
         <activity android:name=".AGroup"
             android:label="ROOM - I Need to Pay"/>
-        <activity android:name=".AMyGroup" />
+        <activity android:name=".AMyGroup"
+            android:label="ROOM - I Need to Receive" />
         <activity android:name=".GCMTest"></activity>
     </application>
 

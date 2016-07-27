@@ -10,6 +10,7 @@ public class OneMyGroup {
     public String mTo;
     public Integer mPrice;
     public Integer mN;
-    public Double mRest;
+    public double mRest;
     public String mGroupinfo;
+    public String mImage;
 }

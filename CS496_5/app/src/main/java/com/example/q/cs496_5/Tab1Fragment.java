@@ -144,7 +144,7 @@ public class Tab1Fragment extends Fragment {
 
 
         Log.e("##",contactList.toString());
-        new FriendsTask().execute(URL+PORT+"/api/match_phonenumber",contactList.toString());
+        new FriendsTask().execute(URL+PORT+"/api/match_phonenumber/"+((MainActivity)MainActivity.mContext).PN,contactList.toString());
 
         return rootView;
     }

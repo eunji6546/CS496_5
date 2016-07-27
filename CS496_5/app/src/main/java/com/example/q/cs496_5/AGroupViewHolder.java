@@ -1,5 +1,6 @@
 package com.example.q.cs496_5;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -12,4 +13,6 @@ public class AGroupViewHolder {
     public TextView mTo;
     public TextView mHavetoPay;
     public TextView mGroupInfo;
+    public ImageView mImage;
+
 }

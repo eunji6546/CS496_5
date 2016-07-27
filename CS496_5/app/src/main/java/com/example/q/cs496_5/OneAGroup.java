@@ -12,4 +12,5 @@ public class OneAGroup {
     public Integer mN;
     public double mHaveToPay;
     public String mGroupinfo;
+    public String mImage;
 }

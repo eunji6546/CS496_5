@@ -132,7 +132,7 @@ public class Tab3Fragment extends Fragment {
                     for( int i=0; i<reclist.length(); i++){
                         JSONObject one = (JSONObject) reclist.get(i);
                         Log.e("FRG3",one.toString());
-                        String date, hostname, hostpn, title, account, bank, due, period;
+                        String date, hostname, hostpn, title, account, bank, due, period,img;
                         JSONArray member;
                         Integer n, price, restPeople;
                         date = one.getString("date").split("T")[0];
@@ -147,8 +147,9 @@ public class Tab3Fragment extends Fragment {
                         price = Integer.parseInt(one.getString("price"));
                         n = Integer.parseInt(one.getString("n"));
                         restPeople = member.length();
+                        img = one.getString("image");
 
-                        myGroupAdapter.addItem(title,restPeople,date,due,price,n,one.toString());
+                        myGroupAdapter.addItem(title,restPeople,date,due,price,n,one.toString(),img);
                     }
                     Message msg = handler.obtainMessage();
                     handler.sendMessage(msg);

@@ -75,10 +75,9 @@ public class MainActivity extends FragmentActivity {
         // FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         mContext = this;
-        /*
-      Intent intent = new Intent(MainActivity.this, GCMTest.class);
-        startActivity(intent);*/
-
+      /*Intent intent = new Intent(MainActivity.this, GCMTest.class);
+        startActivity(intent);
+*/
         PhoneTextView = (TextView) findViewById(R.id.mPhone);
         IdEditView = (EditText) findViewById(R.id.mId);
         PwEditView = (EditText) findViewById(R.id.mPw);
