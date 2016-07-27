@@ -227,11 +227,10 @@ public class Tab1Fragment extends Fragment {
                         String name, phone, plus, minus;
                         name = one.getString("name");
                         phone = one.getString("phonenumber");
-                    /*
-                    * plus = one.getString("plus");
-                    * minus = one.getString("minus");
-                    * */
-                        friendsAdapter.addItem(name, phone, "0", "0");
+                         plus = one.getString("plus");
+                         minus = one.getString("minus");
+
+                        friendsAdapter.addItem(name, phone, plus,minus);
                     }
                     Message msg = handler.obtainMessage();
                     handler.sendMessage(msg);
